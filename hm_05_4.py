@@ -2,13 +2,12 @@ def input_error(func):
     def inner(*args, **kwargs):
         try:
             return func(*args, **kwargs)
-        except (KeyError, ValueError, IndexError) as e:
-            if isinstance(e, KeyError):
-                return "Enter user name."
-            elif isinstance(e, ValueError):
-                return "Give me name and phone please."
-            elif isinstance(e, IndexError):
-                return "Enter the argument for the command."
+        except ValueError:
+            return "Give me name and phone please"
+        except KeyError:
+            return "Enter user name"
+        except IndexError:
+            return "Enter the argument for the command"
     return inner
 
 @input_error
